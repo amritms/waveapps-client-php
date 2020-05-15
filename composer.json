@@ -1,0 +1,34 @@
+{
+  "name": "amritms/waveapps-client-php",
+  "description": "Laravel integration for Saas application to consume Wave's API which is built using GraphQL",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Amrit Man Shrestha",
+      "email": "amritms@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-4": {
+      "Amritms\\WaveappsClientPhp\\": "src/"
+    }
+  },
+  "require": {
+    "guzzlehttp/guzzle": "~6.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.1"
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Amritms\\WaveappsClientPhp\\WaveappsServiceProvider"
+      ],
+      "aliases": {
+        "Waveapps": "Amritms\\WaveappsClientPhp\\Waveapps"
+      }
+    }
+  }
+}
