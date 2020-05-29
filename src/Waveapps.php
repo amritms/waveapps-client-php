@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Amritms\WaveappsClientPhp;
-
 
 use Exception;
 use GuzzleHttp\Client;
@@ -19,27 +17,30 @@ class Waveapps
     private $url;
     private $token;
     private $businessId;
+    protected $config;
 
     /**
      * @var ResponseBuilder
      */
     private $responseBuilder;
 
-    public function __construct($graphqlUrl = null, $token = null, $businessId = null)
+    public function __construct($graphqlUrl = null, $token = null, $businessId = null, array $config = [])
     {
-        $this->token = ($token ? $token : config('waveapps.access_token'));
+        $this->config = $config;
+
+        $this->token = ($token ? $token : $config['access_token']);
         if (empty($this->token)) {
             throw new Exception("Please provide wave app's token", 400);
         }
 
-        $this->url = ($graphqlUrl ? $graphqlUrl : config('waveapps.graphql_uri'));
+        $this->url = ($graphqlUrl ? $graphqlUrl : $config['graphql_uri']);
         if (empty($this->url)) {
             throw new Exception("Please provide wave app's graphql uri", 400);
         }
-        $this->businessId = ($businessId ? $businessId : config('waveapps.business_id'));
+        $this->businessId = ($businessId ? $businessId : $config['businessId']);
 
         $this->client = new Client();
-        $this->url = config('waveapps.graphql_uri');
+        $this->url = $config['graphql_uri'];
         $this->headers = [
             'Authorization' => 'Bearer ' . $this->token,
         ];
