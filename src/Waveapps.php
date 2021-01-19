@@ -24,7 +24,7 @@ class Waveapps
      */
     private $responseBuilder;
 
-    public function __construct($graphqlUrl = null, $token = null, $businessId = null, array $config = [])
+    public function __construct($client = null, $graphqlUrl = null, $token = null, $businessId = null, array $config = [])
     {
         $this->config = $config;
 
@@ -37,10 +37,10 @@ class Waveapps
         if (empty($this->url)) {
             throw new Exception("Please provide wave app's graphql uri", 400);
         }
-        $this->businessId = ($businessId ? $businessId : $config['businessId']);
+        $this->businessId = $businessId ? $businessId : $config['businessId'];
 
-        $this->client = new Client();
-        $this->url = $config['graphql_uri'];
+        $this->client = $client ?: new Client();
+//        $this->url = $config['graphql_uri'];
         $this->headers = [
             'Authorization' => 'Bearer ' . $this->token,
         ];
