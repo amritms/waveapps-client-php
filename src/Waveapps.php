@@ -26,7 +26,6 @@ class Waveapps
 
     public function __construct($client = null, $graphqlUrl = null, $token = null, $businessId = null, array $config = [])
     {
-	dd($config);
         $this->config = $config;
 
         $this->token = ($token ? $token : $config['access_token']);
